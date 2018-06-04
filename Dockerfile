@@ -8,7 +8,7 @@
 
 # Use Ubuntu Trusty Tahr as base image as we're using on Travis CI
 # I also tested with Ubuntu 16.04, should be good with it!
-From ubuntu:14.04
+From ubuntu:16.04
 MAINTAINER Peter Dave Hello <hsu@peterdavehello.org>
 
 # Prevent dialog during apt install
@@ -69,7 +69,8 @@ RUN wget https://storage.googleapis.com/shellcheck/shellcheck-v$SHELLCHECK_VERSI
 RUN LD_LIBRARY_PATH=/tmp shellcheck -V
 
 # Set locale
-RUN locale-gen en_US.UTF-8
+RUN apt-get install -y locales && \
+    locale-gen en_US.UTF-8
 
 # Print tool versions
 RUN bash --version | head -n 1
